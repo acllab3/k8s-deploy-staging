@@ -31,7 +31,7 @@ pipeline {
         }
       }
     }
-    /*
+    
     stage('DT Deploy Event') {
       steps {
         container("curl") {
@@ -40,25 +40,7 @@ pipeline {
         }
       }
     }
-    */
-    stage('DT Deploy Event') {
-  steps {
-    createDynatraceDeploymentEvent(
-      envId: 'Dynatrace Tenant',
-      tagMatchRules: [
-        [
-          meTypes: [
-            [meType: 'SERVICE']
-          ],
-          tags: [
-            [context: 'CONTEXTLESS', key: 'app', value: "${env.APP_NAME}"],
-            [context: 'CONTEXTLESS', key: 'environment', value: 'staging']
-          ]
-        ]
-      ]) {
-    }
-  }
-}
+    
     stage('Run production ready e2e check in staging') {
       steps {
         echo "Waiting for the service to start..."
